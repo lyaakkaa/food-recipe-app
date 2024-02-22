@@ -35,9 +35,35 @@ const GlobalState = ({ children }) => {
     }
   };
 
+  const handleAddToFavorite = (getCurrentItem) => {
+    // console.log(getCurrentItem);
+    let cpuFavoritesList = [...favoritesList];
+    const index = cpuFavoritesList.findIndex(
+      (item) => item.id === getCurrentItem.id
+    );
+    if (index === -1) {
+      cpuFavoritesList.push(getCurrentItem);
+    } else {
+      cpuFavoritesList.splice(index);
+    }
+    setFavoritesList(cpuFavoritesList);
+  };
+
+  // console.log(favoritesList, "favoritessss");
+
   return (
     <GlobalContext.Provider
-      value={{ searchParam, loading, recipeList, setSearchParam, handleSubmit }}
+      value={{
+        searchParam,
+        loading,
+        recipeList,
+        setSearchParam,
+        handleSubmit,
+        recipeDetailsData,
+        setRecipeDetailsData,
+        handleAddToFavorite,
+        favoritesList,
+      }}
     >
       {children}
     </GlobalContext.Provider>
